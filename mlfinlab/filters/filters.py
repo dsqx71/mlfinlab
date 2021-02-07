@@ -43,6 +43,8 @@ def cusum_filter(raw_time_series, threshold, time_stamps=True):
     # log returns
     raw_time_series = pd.DataFrame(raw_time_series)  # Convert to DataFrame
     raw_time_series.columns = ['price']
+    # log return and gross return are very very close when your gross return is small,
+    # say less than 1%. It can be mathematically proved by 2nd-order Taylor expansion around 0
     raw_time_series['log_ret'] = raw_time_series.price.apply(np.log).diff()
     if isinstance(threshold, (float, int)):
         raw_time_series['threshold'] = threshold
